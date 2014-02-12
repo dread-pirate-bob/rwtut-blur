@@ -8,11 +8,13 @@
 
 #import "DropDownMenuController.h"
 #import "UIView+Screenshot.h"
+#import <GPUImage/GPUImage.h>
 
 #define MENUSIZE 150.0f
 
 @interface DropDownMenuController (){
-    UIView *_blurView;
+    GPUImageView *_blurView;
+    GPUImageiOSBlurFilter *_blurFilter;
     UIView *_backgroundView;
 }
 
@@ -30,8 +32,12 @@ BOOL removed;
     CGRect deviceSize = [UIScreen mainScreen].bounds;
     
     removed = NO;
-    _blurView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, deviceSize.size.height, 0)];
-    _blurView.backgroundColor = [UIColor grayColor];
+    _blurView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, 0, deviceSize.size.height, 0)];
+    _blurView.clipsToBounds = YES;
+    _blurView.layer.contentsGravity = kCAGravityTop;
+    
+    // replacing with blur effect
+    //_blurView.backgroundColor = [UIColor grayColor];
     
     [self.view addSubview:_blurView];
     
@@ -104,9 +110,15 @@ BOOL removed;
     
     CGRect deviceSize = [UIScreen mainScreen].bounds;
 
+    // resize the content scale before animating
+    _blurView.layer.contentsScale = 2.0f;
+    
     [UIView animateWithDuration:0.25f animations:^(void){
         _blurView.frame = CGRectMake(0, 0, deviceSize.size.height, MENUSIZE);
         _backgroundView.frame = CGRectMake(0, 0, _backgroundView.frame.size.width, MENUSIZE);
+        
+        _blurView.layer.contentsRect = CGRectMake(0.0f, 0.0f, 1.0f, MENUSIZE / 320.0f);
+        _blurView.layer.contentsScale = (MENUSIZE / 320.0f) * 2;
     }];
     
 }
@@ -147,9 +159,19 @@ BOOL removed;
 }
 
 -(void)updateBlur {
+    if (_blurFilter == nil) {
+        _blurFilter = [[GPUImageiOSBlurFilter alloc] init];
+        _blurFilter.blurRadiusInPixels = 1.0f;
+    }
+    
     // capture the current view's superview using our category method
     UIImage *image = [self.view.superview convertViewToImage];
+    GPUImagePicture *picture = [[GPUImagePicture alloc] initWithImage:image];
     
+    [picture addTarget:_blurFilter];
+    [_blurFilter addTarget:_blurView];
+    
+    [picture processImage];
 }
 
 @end
