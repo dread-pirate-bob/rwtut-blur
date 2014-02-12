@@ -7,6 +7,7 @@
 //
 
 #import "DropDownMenuController.h"
+#import "UIView+Screenshot.h"
 
 #define MENUSIZE 150.0f
 
@@ -98,13 +99,15 @@ BOOL removed;
     
     [self addToParentViewController];
     
+    // update the static blur image
+    [self updateBlur];
+    
     CGRect deviceSize = [UIScreen mainScreen].bounds;
 
     [UIView animateWithDuration:0.25f animations:^(void){
         _blurView.frame = CGRectMake(0, 0, deviceSize.size.height, MENUSIZE);
         _backgroundView.frame = CGRectMake(0, 0, _backgroundView.frame.size.width, MENUSIZE);
     }];
-    
     
 }
 
@@ -143,6 +146,10 @@ BOOL removed;
     }
 }
 
-
+-(void)updateBlur {
+    // capture the current view's superview using our category method
+    UIImage *image = [self.view.superview convertViewToImage];
+    
+}
 
 @end
