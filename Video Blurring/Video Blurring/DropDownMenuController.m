@@ -112,7 +112,7 @@ BOOL removed;
 
     // resize the content scale before animating
     _blurView.layer.contentsScale = 2.0f;
-    
+#warning 10 second duration for debugging
     [UIView animateWithDuration:10.25f animations:^(void){
         _blurView.frame = CGRectMake(0, 0, deviceSize.size.height, MENUSIZE);
         _backgroundView.frame = CGRectMake(0, 0, _backgroundView.frame.size.width, MENUSIZE);
