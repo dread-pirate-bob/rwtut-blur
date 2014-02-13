@@ -10,6 +10,7 @@
 #import <GPUImage/GPUImage.h>
 
 #import "ViewController.h"
+#import "BlurView.h"
 
 
 @interface ViewController (){
@@ -23,11 +24,14 @@
     
     GPUImageMovieWriter *_movieWriter;
     
-    UIView *_recordView;
+    GPUImageiOSBlurFilter *_blurFilter;
+    GPUImageBuffer *_videoBuffer;
+    
+    BlurView *_recordView;
     UIButton *_recordButton;
     BOOL _recording;
     
-    UIView *_controlView;
+    BlurView *_controlView;
     UIButton *_controlButton;
     BOOL _playing;
     
@@ -44,6 +48,10 @@
 {
     [super viewDidLoad];
     
+    _blurFilter = [[GPUImageiOSBlurFilter alloc] init];
+    _videoBuffer = [[GPUImageBuffer alloc] init];
+    [_videoBuffer setBufferSize:1];
+    
     _backgroundImageView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.height, self.view.frame.size.width)];
     [self.view insertSubview:_backgroundImageView atIndex:0];
     
@@ -53,8 +61,8 @@
     _tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(prepareToHideInterface)];
     [self.view addGestureRecognizer:_tap];
     
-    _recordView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.height/2 - 50, 250, 110, 60)];
-    _recordView.backgroundColor = [UIColor grayColor];
+    _recordView = [[BlurView alloc] initWithFrame:CGRectMake(self.view.frame.size.height/2 - 50, 250, 110, 60)];
+    //_recordView.backgroundColor = [UIColor grayColor];
     
     _recordButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _recordButton.frame = CGRectMake(5, 5, 100, 50);
@@ -70,12 +78,12 @@
     [self.view addSubview:_recordView];
     
     
-    _controlView = [[UIView alloc] initWithFrame:CGRectMake(self.view.frame.size.height/2 - 40, 230, 80, 80)];
-    _controlView.backgroundColor = [UIColor grayColor];
+    _controlView = [[BlurView alloc] initWithFrame:CGRectMake(self.view.frame.size.height/2 - 40, 230, 80, 80)];
+    //_controlView.backgroundColor = [UIColor grayColor];
     
     _controlButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _controlButton.frame = CGRectMake(0, 0, 80, 80);
-    [_controlButton setImage:[UIImage imageNamed:@"PlayButton.png"] forState:UIControlStateNormal] ;
+    [_controlButton setImage:[UIImage imageNamed:@"PlayButton.png"] forState:UIControlStateNormal];
     [_controlButton addTarget:self action:@selector(toggleVideo) forControlEvents:UIControlEventTouchUpInside];
     
     [_controlView addSubview:_controlButton];
@@ -84,8 +92,6 @@
     [self.view addSubview:_controlView];
     
     [self useLiveCamera];
-    
-    
 }
 
 -(IBAction)showButtonPressed{

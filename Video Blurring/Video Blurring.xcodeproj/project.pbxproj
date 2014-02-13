@@ -27,6 +27,7 @@
 		96F6B5E41847161800D7B337 /* RecordDot.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6B5E01847161800D7B337 /* RecordDot.png */; };
 		96F6B5E51847161800D7B337 /* RecordStop.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6B5E11847161800D7B337 /* RecordStop.png */; };
 		96F6B5E61847161800D7B337 /* StopButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 96F6B5E21847161800D7B337 /* StopButton.png */; };
+		B428D50E18AC891B006713A6 /* BlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = B428D50D18AC891B006713A6 /* BlurView.m */; };
 		B465EAEF18AB3A0900413292 /* UIView+Screenshot.m in Sources */ = {isa = PBXBuildFile; fileRef = B465EAEE18AB3A0900413292 /* UIView+Screenshot.m */; };
 		E7482F79183A9D6300D713B3 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7482F78183A9D6200D713B3 /* CFNetwork.framework */; };
 		E7482F7B183A9D6900D713B3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7482F7A183A9D6900D713B3 /* QuartzCore.framework */; };
@@ -65,6 +66,8 @@
 		96F6B5E01847161800D7B337 /* RecordDot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordDot.png; sourceTree = "<group>"; };
 		96F6B5E11847161800D7B337 /* RecordStop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RecordStop.png; sourceTree = "<group>"; };
 		96F6B5E21847161800D7B337 /* StopButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = StopButton.png; sourceTree = "<group>"; };
+		B428D50C18AC891B006713A6 /* BlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurView.h; sourceTree = "<group>"; };
+		B428D50D18AC891B006713A6 /* BlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurView.m; sourceTree = "<group>"; };
 		B465EAED18AB3A0900413292 /* UIView+Screenshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Screenshot.h"; sourceTree = "<group>"; };
 		B465EAEE18AB3A0900413292 /* UIView+Screenshot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Screenshot.m"; sourceTree = "<group>"; };
 		E7482F78183A9D6200D713B3 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -133,6 +136,8 @@
 				96079CE4182E144800AA28AD /* DropDownMenuController.m */,
 				96079CC3182E11B600AA28AD /* ViewController.h */,
 				96079CC4182E11B600AA28AD /* ViewController.m */,
+				B428D50C18AC891B006713A6 /* BlurView.h */,
+				B428D50D18AC891B006713A6 /* BlurView.m */,
 				96079CC0182E11B600AA28AD /* Main.storyboard */,
 				96079CC6182E11B600AA28AD /* Images.xcassets */,
 				96079CB5182E11B600AA28AD /* Supporting Files */,
@@ -264,6 +269,7 @@
 				96079CBF182E11B600AA28AD /* AppDelegate.m in Sources */,
 				96079CBB182E11B600AA28AD /* main.m in Sources */,
 				B465EAEF18AB3A0900413292 /* UIView+Screenshot.m in Sources */,
+				B428D50E18AC891B006713A6 /* BlurView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
