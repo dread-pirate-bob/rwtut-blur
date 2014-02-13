@@ -113,8 +113,8 @@ BOOL removed;
 
     // resize the content scale before animating
     _blurView.layer.contentsScale = 2.0f;
-#warning 10 second duration for debugging
-    [UIView animateWithDuration:10.25f animations:^(void){
+
+    [UIView animateWithDuration:0.25f animations:^(void){
         _blurView.frame = CGRectMake(0, 0, deviceSize.size.height, MENUSIZE);
         _backgroundView.frame = CGRectMake(0, 0, _backgroundView.frame.size.width, MENUSIZE);
         
@@ -162,7 +162,7 @@ BOOL removed;
 -(void)updateBlur {
     if (_blurFilter == nil) {
         _blurFilter = [[GPUImageiOSBlurFilter alloc] init];
-        _blurFilter.blurRadiusInPixels = 1.0f;
+        _blurFilter.blurRadiusInPixels = 4.0f;
     }
     
     // capture the current view's superview using our category method
