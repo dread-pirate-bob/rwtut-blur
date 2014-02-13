@@ -35,6 +35,7 @@ BOOL removed;
     _blurView = [[GPUImageView alloc] initWithFrame:CGRectMake(0, 0, deviceSize.size.height, 0)];
     _blurView.clipsToBounds = YES;
     _blurView.layer.contentsGravity = kCAGravityTop;
+    _blurView.layer.contentsRect = CGRectMake(0.0f, 0.0f, 1.0f, 0.0f);
     
     // replacing with blur effect
     //_blurView.backgroundColor = [UIColor grayColor];
@@ -120,7 +121,6 @@ BOOL removed;
         _blurView.layer.contentsRect = CGRectMake(0.0f, 0.0f, 1.0f, MENUSIZE / 320.0f);
         _blurView.layer.contentsScale = (MENUSIZE / 320.0f) * 2;
     }];
-    
 }
 
 -(void)hide{
@@ -128,6 +128,7 @@ BOOL removed;
     [UIView animateWithDuration:0.25f animations:^(void){
         _backgroundView.frame = CGRectMake(0, -_backgroundView.frame.size.height, _backgroundView.frame.size.width, _backgroundView.frame.size.height);
         _blurView.frame = CGRectMake(0, 0, _blurView.frame.size.width, 0);
+        _blurView.layer.contentsRect = CGRectMake(0.0f, 0.0f, 1.0f, 0.0f);
     }
                      completion:^(BOOL finished){
                          [self didMoveToParentViewController:nil];
