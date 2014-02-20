@@ -15,6 +15,9 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        CGRect deviceSize = [UIScreen mainScreen].bounds;
+        self.layer.contentsRect = CGRectMake(frame.origin.x/deviceSize.size.height, frame.origin.y/deviceSize.size.width, frame.size.width/deviceSize.size.height, frame.size.height/deviceSize.size.width);
+        self.fillMode = kGPUImageFillModeStretch;
     }
     return self;
 }

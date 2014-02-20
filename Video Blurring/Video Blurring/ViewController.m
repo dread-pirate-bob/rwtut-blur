@@ -139,7 +139,11 @@
     _liveVideo = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1280x720 cameraPosition:AVCaptureDevicePositionBack];
     _liveVideo.outputImageOrientation = UIInterfaceOrientationLandscapeLeft;
     
-    [_liveVideo addTarget:_backgroundImageView];
+    [_liveVideo addTarget:_videoBuffer];
+    [_videoBuffer addTarget:_backgroundImageView];
+    [_videoBuffer addTarget:_blurFilter];
+    [_blurFilter addTarget:_recordView];
+    
     [_liveVideo startCameraCapture];
     
     _recordView.hidden = NO;
@@ -166,7 +170,11 @@
     _recordedVideo = [[GPUImageMovie alloc] initWithURL:url];
     _recordedVideo.shouldRepeat = YES;
     _recordedVideo.playAtActualSpeed = YES;
-    [_recordedVideo addTarget:_backgroundImageView];
+    
+    [_recordedVideo addTarget:_videoBuffer];
+    [_videoBuffer addTarget:_backgroundImageView];
+    [_videoBuffer addTarget:_blurFilter];
+    [_blurFilter addTarget:_controlView];
     
     _recordView.hidden = YES;
     _controlView.hidden = NO;
@@ -202,8 +210,6 @@
         
         _menuButton.hidden = NO;
         _recording = NO;
-
-
     }
 }
 
@@ -217,8 +223,7 @@
         [_controlButton setImage:[UIImage imageNamed:@"StopButton.png"] forState:UIControlStateNormal];
         _playing = YES;
         [self prepareToHideInterface];
-    }
-    else{
+    } else {
         [_recordedVideo endProcessing];
         [_controlButton setImage:[UIImage imageNamed:@"PlayButton.png"] forState:UIControlStateNormal];
         _playing = NO;
